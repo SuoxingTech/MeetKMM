@@ -1,5 +1,6 @@
 val kotlinCoroutines = "1.6.2"
 val lifecycle = "2.5.1"
+val dataStore = "1.0.0"
 
 plugins {
     kotlin("multiplatform")
@@ -39,6 +40,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines")
                 api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
+                implementation("androidx.datastore:datastore-preferences:$dataStore")
             }
         }
         val androidTest by getting

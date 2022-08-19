@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.uiStateFlow.collect {
-                    tv.text = "Server said: $it"
+                    tv.text = it
                 }
             }
         }
