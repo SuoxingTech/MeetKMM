@@ -1,20 +1,18 @@
 package dev.suoxing.meetkmm.viewmodel
 
 import dev.suoxing.kmm_arch.ioDispatcher
-import dev.suoxing.kmm_arch.viewmodel.ViewModel
 import dev.suoxing.meetkmm.Greeting
 import dev.suoxing.meetkmm.HappyKV
+import dev.suoxing.meetkmm.base.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 
-class HelloViewModel : ViewModel<String>() {
+class HelloViewModel : BaseViewModel<String>() {
 
-    private val _greetFlow = MutableStateFlow("loading...")
-    override val uiStateFlow: StateFlow<String> = _greetFlow
+    override val _uiStateFlow = MutableStateFlow("loading...")
 
     private val testKey = "test_key"
 
@@ -39,19 +37,19 @@ class HelloViewModel : ViewModel<String>() {
     fun doWelcome(ms: Long) {
         viewModelScope.launch {
             delay(1000)
-            _greetFlow.value = "Welcome back! $ms ms to read."
+            _uiStateFlow.value = "Welcome back! $ms ms to read."
         }
     }
 
     fun doGreet() {
         viewModelScope.launch {
             delay(1000)
-            _greetFlow.value = "1000ms later..."
+            _uiStateFlow.value = "1000ms later..."
             delay(300)
             val resp = withContext(ioDispatcher) {
                 Greeting().getGreet()
             }
-            _greetFlow.value = resp
+            _uiStateFlow.value = resp
         }
     }
 }

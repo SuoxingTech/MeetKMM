@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dev.suoxing.kmm_arch.createViewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 actual abstract class ViewModel<T: Any> actual constructor(): ViewModel() {
@@ -15,5 +16,6 @@ actual abstract class ViewModel<T: Any> actual constructor(): ViewModel() {
         viewModelScope.cancel()
     }
 
-    actual abstract val uiStateFlow: StateFlow<T>
+    protected actual abstract val _uiStateFlow: MutableStateFlow<T>
+    actual val uiStateFlow: StateFlow<T> = _uiStateFlow
 }
