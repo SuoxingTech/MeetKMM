@@ -16,4 +16,8 @@ abstract class BaseViewModel<T : Any> : ViewModel<T>(), KoinComponent {
      * Provide a way for UI layer to start running ViewModel manually.
      */
     open fun start() { }
+
+    protected open fun updateState(block: T.() -> T) {
+        _uiStateFlow.value = _uiStateFlow.value.block()
+    }
 }
