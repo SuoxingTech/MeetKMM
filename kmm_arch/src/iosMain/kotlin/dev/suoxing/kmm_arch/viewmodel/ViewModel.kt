@@ -16,7 +16,6 @@ actual abstract class ViewModel<T: Any> actual constructor() {
     }
 
     protected actual abstract val _uiStateFlow: MutableStateFlow<T>
-    actual val uiStateFlow: StateFlow<T> = _uiStateFlow
 
     fun peek(): T = uiStateFlow.value
 

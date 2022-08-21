@@ -11,5 +11,4 @@ expect abstract class ViewModel<T: Any>() {
     open fun onCleared()
 
     protected abstract val _uiStateFlow: MutableStateFlow<T>
-    val uiStateFlow: StateFlow<T>
 }
