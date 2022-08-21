@@ -17,10 +17,10 @@ actual abstract class ViewModel<T: Any> actual constructor() {
 
     protected actual abstract val _uiStateFlow: MutableStateFlow<T>
 
-    fun peek(): T = uiStateFlow.value
+    fun peek(): T = _uiStateFlow.value
 
     fun collect(onEach: (T) -> Unit) {
-        uiStateFlow
+        _uiStateFlow
             .onEach { onEach(it) }
             .launchIn(viewModelScope)
     }
