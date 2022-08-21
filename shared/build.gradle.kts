@@ -56,6 +56,7 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktor")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines")
+                api("io.insert-koin:koin-android:$koin")
             }
         }
         val androidTest by getting
