@@ -6,9 +6,9 @@ import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
 
-data class MemoBook(
+open class MemoBook : RealmObject {
     @PrimaryKey
-    val _id: ObjectId = ObjectId.create(),
-    val title: String = "",
-    val memos: RealmList<Memo> = realmListOf()
-) : RealmObject
+    var _id: ObjectId = ObjectId.create()
+    var title: String = ""
+    var memos: RealmList<Memo> = realmListOf()
+}

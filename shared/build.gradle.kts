@@ -38,7 +38,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktor")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktor")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor")
-                implementation("io.realm.kotlin:library-base:$realm")
+                api("io.realm.kotlin:library-base:$realm")
                 api("io.insert-koin:koin-core:$koin")
                 api("io.insert-koin:koin-test:$koin")
                 api(project(":kmm_arch"))

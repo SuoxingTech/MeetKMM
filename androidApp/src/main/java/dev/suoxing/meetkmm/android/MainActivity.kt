@@ -1,36 +1,36 @@
 package dev.suoxing.meetkmm.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import dev.suoxing.meetkmm.Greeting
-import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import dev.suoxing.meetkmm.android.ui.MemoScene
 import dev.suoxing.meetkmm.viewmodel.HelloViewModel
+import dev.suoxing.meetkmm.viewmodel.MemoViewModel
 import kotlinx.coroutines.launch
 
 fun greet(): String {
     return Greeting().greeting()
 }
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<HelloViewModel>()
+    private val memoViewModel by viewModels<MemoViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.uiStateFlow.collect {
-                    tv.text = it
-                }
+        memoViewModel.start()
+        setContent {
+            MaterialTheme {
+                MemoScene(memoViewModel)
             }
         }
     }
