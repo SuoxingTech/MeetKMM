@@ -40,4 +40,9 @@ class ObservableViewModel<UiState: AnyObject, VM: Kmm_archViewModel<UiState>> : 
             self.uiState = value
         }
     }
+    
+    deinit {
+        // cancel coroutine scope
+        self.actor.onCleared()
+    }
 }
