@@ -1,5 +1,6 @@
 package dev.suoxing.meetkmm.android.ui
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
@@ -7,22 +8,30 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.TextFieldValue
+import dev.suoxing.meetkmm.UiStatus
 import dev.suoxing.meetkmm.model.MemoBook
 import dev.suoxing.meetkmm.viewmodel.MemoViewModel
 
 @Composable
 fun MemoScene(
-    viewModel: MemoViewModel
+    viewModel: MemoViewModel = viewModel()
 ) {
+    LaunchedEffect("") {
+        viewModel.start()
+    }
     val state = viewModel.uiStateFlow.collectAsState()
     Scaffold {
-        MemoBookComponent(
-            memoBook = state.value.firstBook,
-            onAddMemo = { content, bookName ->
-                viewModel.createMemo(content, bookName)
-            },
-            onCreateDefaultBook = { viewModel.createMemoBook() }
-        )
+        if (state.value.status == UiStatus.LOADING) {
+            Text(text = "Loading")
+        } else {
+            MemoBookComponent(
+                memoBook = state.value.firstBook,
+                onAddMemo = { content, bookName ->
+                    viewModel.createMemo(content, bookName)
+                },
+                onCreateDefaultBook = { viewModel.createMemoBook() }
+            )
+        }
     }
 }
 
