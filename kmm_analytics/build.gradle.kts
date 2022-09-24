@@ -5,6 +5,8 @@ plugins {
 }
 
 version = "1.0"
+val firebaseApple = "~> 9.6.0"
+val firebaseAndroid = "30.4.0"
 
 kotlin {
     android()
@@ -19,6 +21,12 @@ kotlin {
         framework {
             baseName = "kmm_analytics"
         }
+        pod("FirebaseAnalytics") {
+            version = firebaseApple
+        }
+        pod("FirebaseCrashlytics") {
+            version = firebaseApple
+        }
     }
     
     sourceSets {
@@ -28,7 +36,13 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("com.google.firebase:firebase-bom:$firebaseAndroid")
+                implementation("com.google.firebase:firebase-analytics-ktx")
+                implementation("com.google.firebase:firebase-crashlytics-ktx")
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
