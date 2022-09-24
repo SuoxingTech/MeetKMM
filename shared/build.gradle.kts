@@ -42,6 +42,7 @@ kotlin {
                 api("io.insert-koin:koin-core:$koin")
                 api("io.insert-koin:koin-test:$koin")
                 api(project(":kmm_arch"))
+                api(project(":kmm_analytics"))
             }
         }
         val commonTest by getting {
