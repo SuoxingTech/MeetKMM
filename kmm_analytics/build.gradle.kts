@@ -38,7 +38,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.firebase:firebase-bom:$firebaseAndroid")
+                implementation(project.dependencies.platform("com.google.firebase:firebase-bom:$firebaseAndroid"))
                 implementation("com.google.firebase:firebase-analytics-ktx")
                 implementation("com.google.firebase:firebase-crashlytics-ktx")
             }
